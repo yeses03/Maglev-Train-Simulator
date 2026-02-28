@@ -1,93 +1,144 @@
-# Maglev-Train-Simulator
+# Advanced Maglev Train Simulation
 
-## 2D Multi-Magnet Electromagnetic Suspension (EMS) System  
-With PID Control, Aerodynamics, Thermal Modeling, and Propulsion
+## Overview
 
----
-
-## 📌 Project Overview
-
-This project is a high-fidelity Python simulation of an Electromagnetic Suspension (EMS) Maglev Train system.
+This project is a Python-based simulation of a maglev (magnetic levitation) train system.
 
 The simulator models:
 
-- 2D motion (vertical levitation + horizontal propulsion)
-- 4 independent electromagnets
-- PID-controlled levitation
+- Vertical levitation using electromagnets
+- PID control for height stabilization
+- Horizontal propulsion using a linear motor model
 - Aerodynamic drag
-- Linear motor propulsion
-- Electrical power consumption
 - Coil heating and thermal shutdown
-- Stability and performance metrics
+- Energy consumption tracking
+- Performance metrics
 
-The goal is to simulate real-world engineering constraints encountered in high-speed maglev systems.
-
----
-
-## ⚙️ Features
-
-### 🔹 Electromagnetic Levitation (EMS)
-
-Magnetic force model:
-
-F = (k · |u|) / d²
-
-Where:
-- k = magnetic constant  
-- u = control signal (PID output)  
-- d = air gap distance  
+The goal is to simulate a realistic engineering-level maglev system rather than a simple animation.
 
 ---
 
-### 🔹 PID Control System
+## Features
 
-Each of the 4 magnets uses independent PID control:
+### Electromagnetic Levitation
 
-u(t) = Kp·e(t) + Ki∫e(t)dt + Kd·de/dt
+Magnetic lift force depends on:
 
-This stabilizes the train at the target levitation height.
+- Magnetic constant
+- Control signal from PID controller
+- Distance between train and track
 
----
-
-### 🔹 Aerodynamic Drag
-
-Fd = ½ ρ Cd A v²
-
-Where:
-- ρ = air density  
-- Cd = drag coefficient  
-- A = frontal area  
+The system continuously adjusts magnetic force to maintain a target levitation height.
 
 ---
 
-### 🔹 Linear Motor Propulsion
+### PID Control
 
-F = B I L
+Each electromagnet uses a PID controller with:
 
-Where:
-- B = magnetic flux density  
-- I = propulsion current  
-- L = conductor length  
+- Kp (Proportional gain)
+- Ki (Integral gain)
+- Kd (Derivative gain)
 
----
-
-### 🔹 Thermal Model
-
-Power loss in coils:
-
-P = I²R
-
-Temperature rise:
-
-ΔT = Q / (m c)
-
-The system automatically shuts down if the coil temperature exceeds the maximum safe limit.
+These values control stability, overshoot, and settling time.
 
 ---
 
-## 🛠 Installation
+### Aerodynamic Drag
 
-Install dependencies:
+Drag increases with velocity and limits maximum speed.
 
-```bash
+---
+
+### Linear Motor Propulsion
+
+Forward motion is generated using a simplified electromagnetic propulsion model.
+
+---
+
+### Thermal Model
+
+Electrical losses generate heat in the coils.
+
+If temperature exceeds the maximum allowed value, the system shuts down automatically.
+
+---
+
+## Installation
+
+Install required libraries:
+
 pip install numpy matplotlib
+
+---
+
+## How To Run
+
+Run the simulation:
+
+python maglev_simulation.py
+
+
+The program will:
+
+1. Run the simulation
+2. Print performance metrics
+3. Display graphs for:
+   - Levitation height
+   - Forward velocity
+   - Coil temperature
+   - Energy consumption
+
+---
+
+## Configuration
+
+All system parameters are defined in the CONFIG dictionary at the top of the Python file.
+
+You can modify:
+
+- mass
+- target_height
+- Kp, Ki, Kd
+- propulsion current
+- drag coefficient
+- coil resistance
+- maximum temperature
+
+---
+
+## Performance Metrics
+
+The simulation calculates:
+
+- Final forward velocity
+- Steady-state height
+- Overshoot percentage
+- Total energy used
+- Final coil temperature
+- Shutdown status
+
+---
+
+## Future Improvements
+
+Possible extensions:
+
+- 3D simulation
+- Pitch and roll modeling
+- GUI interface
+- Data export to CSV
+- Real-world train comparison
+
+---
+
+## Project Type
+
+Electromechanical Control Systems Simulation  
+Advanced Undergraduate Level
+
+---
+
+## License
+
+This project is intended for academic and educational use.
