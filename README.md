@@ -1,4 +1,4 @@
-# Advanced Maglev Train Simulation
+# Maglev Train Simulation
 
 ## Overview
 
